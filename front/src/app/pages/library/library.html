@@ -1,0 +1,92 @@
+<div class="container mx-auto px-4 py-8">
+  
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+    <h1 class="text-3xl font-bold text-gray-800">Library</h1>
+    
+    <a routerLink="/add" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition">
+      <span> add mosi9a track</span>
+    </a>
+  </div>
+
+  <div class="bg-white p-4 rounded-xl shadow-sm mb-8 flex flex-col md:flex-row gap-4 border">
+    
+    <div class="flex-1 relative">
+      <input 
+        type="text" 
+          (input)="searchQuery.set($any($event.target).value)"
+        placeholder=" search for mosi9a or artist" 
+        class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+      >
+      <span class="absolute left-3 top-2.5 text-gray-400">🔍</span>
+    </div>
+
+    <select 
+       (change)="selectedGenre.set($any($event.target).value)"
+      class="p-2 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-indigo-500"
+    >
+      <option value="all">all</option>
+      <option value="Rap">rap</option>
+      <option value="cha3bi">cha3bi</option>
+    </select>
+  </div>
+
+  @if (trackService.isLoading()) {
+    <div class="text-center py-10">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+      <p class="mt-4 text-gray-600">Loading your library...</p>
+    </div>
+  }
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    
+    @for (track of filteredTracks(); track track.id) {
+      <div 
+        [routerLink]="['/track', track.id]" 
+        class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer border border-gray-100 group relative"
+      >
+        <div class="h-48 bg-gray-200 flex items-center justify-center relative">
+          <span class="text-4xl">🎵</span>
+          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center"
+     (click)="onPlayTrack(track, $event); setClicked()"> <span class="opacity-0 group-hover:opacity-100 text-white text-5xl drop-shadow-lg">
+    play icon
+  </span>
+</div>
+        </div>
+
+        <div class="p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-lg text-gray-800 truncate">{{ track.title }}</h3>
+              <p class="text-sm text-gray-500">{{ track.artist }}</p>
+            </div>
+            <span class="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-600">
+              {{ track.duration | duration }}
+            </span>
+          </div>
+          
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-xs uppercase font-bold text-indigo-500 tracking-wider border border-indigo-100 px-2 py-1 rounded-full bg-indigo-50">
+              {{ track.genre }}
+            </span>
+            
+            <button 
+              class="text-red-400 hover:text-red-600 p-1 hover:bg-red-50 rounded-full transition"
+              title="Delete track"
+              (click)="deleteTrack(track.id); trackService.loadTracks(); $event.stopPropagation()"
+            >
+             delete icon
+            </button>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      @if (!trackService.isLoading()) {
+        <div class="col-span-full text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+          <p class="text-xl text-gray-500 mb-4">No matching tracks found</p>
+          <a routerLink="/add" class="text-indigo-600 font-bold hover:underline">Add your first track now!</a>
+        </div>
+      }
+    }
+
+  </div>
+</div>
