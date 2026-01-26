@@ -3,7 +3,6 @@ package com.musicstream.service;
 import com.musicstream.model.Track;
 import com.musicstream.repository.TrackRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class TrackService {
 
-    private TrackRepository repository;
+    private final TrackRepository repository;
 
     private final Path root = Paths.get("uploads");
 
