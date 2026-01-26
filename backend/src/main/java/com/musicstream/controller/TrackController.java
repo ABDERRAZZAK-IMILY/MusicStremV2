@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TrackController {
 
-    private TrackService service;
+    private final TrackService service;
 
     @GetMapping
     public List<Track> getTracks() {
