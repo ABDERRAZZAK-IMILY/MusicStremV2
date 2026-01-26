@@ -1,7 +1,7 @@
 package com.musicstream.controller;
 
-import com.musicstream.model.Track;
-import com.musicstream.service.TrackService;
+import com.musicstream.dto.TrackDTO;
+import com.musicstream.service.impl.TrackServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,16 +15,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TrackController {
 
-    private final TrackService service;
+    private final TrackServiceImpl service;
 
     @GetMapping
-    public List<Track> getTracks() {
+    public List<TrackDTO> getTracks() {
         return service.getAllTracks();
     }
 
     @PostMapping(consumes = {"multipart/form-data"})
-    public Track addTrack(
-            @RequestPart("track") Track track,
+    public TrackDTO addTrack(
+            @RequestPart("track") TrackDTO track,
             @RequestPart("audioFile") MultipartFile audio,
             @RequestPart(value = "coverImage", required = false) MultipartFile cover
     ) throws Exception {
