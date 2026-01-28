@@ -8,6 +8,6 @@ export interface Track {
     genre: string;
     audioFileUrl?: string;
     coverImageUrl?: string;
-    audioFile?: File;       
-    coverImage?: File;         
+    audioFile?: File;
+    coverImage?: File;
 }
