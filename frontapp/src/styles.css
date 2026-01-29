@@ -1,4 +1,306 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Import Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  body {
+    @apply bg-white text-gray-800 font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* =============================================
+     LAYOUT COMPONENTS
+     ============================================= */
+
+  .app-container {
+    @apply min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100;
+  }
+
+  .sidebar {
+    @apply fixed left-0 top-0 h-full w-64 bg-white/90 backdrop-blur-xl border-r border-gray-200 flex flex-col z-50 shadow-lg;
+  }
+
+  .sidebar-brand {
+    @apply px-6 py-8 flex items-center gap-3;
+  }
+
+  .sidebar-logo {
+    @apply w-10 h-10 bg-gradient-purple-blue rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary-500/30;
+  }
+
+  .sidebar-title {
+    @apply text-xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent;
+  }
+
+  .sidebar-nav {
+    @apply flex-1 px-4 space-y-2;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 transition-all duration-300 hover:text-primary-600 hover:bg-primary-50;
+  }
+
+  .nav-link-active {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-primary-700 bg-gradient-to-r from-primary-100 to-accent-100 border border-primary-200 shadow-lg shadow-primary-500/10;
+  }
+
+  .nav-icon {
+    @apply text-xl;
+  }
+
+  .main-content {
+    @apply ml-64 min-h-screen p-8;
+  }
+
+  /* =============================================
+     CARD COMPONENTS
+     ============================================= */
+
+  .glass-card {
+    @apply bg-white backdrop-blur-xl rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50;
+  }
+
+  .music-card {
+    @apply relative bg-white backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-200 transition-all duration-500 cursor-pointer hover:border-primary-400 hover:shadow-2xl hover:shadow-primary-500/20 hover:-translate-y-2 hover:scale-[1.02];
+  }
+
+  .music-card-image {
+    @apply relative h-48 bg-gradient-to-br from-primary-600/40 to-accent-600/40 overflow-hidden;
+  }
+
+  .music-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-gray-900/70 via-transparent to-transparent opacity-0 transition-all duration-300 flex items-center justify-center;
+  }
+
+  .music-card:hover .music-card-overlay {
+    opacity: 1;
+  }
+
+  .music-card-play {
+    @apply w-14 h-14 rounded-full bg-gradient-purple-blue flex items-center justify-center text-white text-2xl shadow-xl shadow-primary-500/40 transform scale-0 transition-transform duration-300 hover:scale-110 active:scale-95;
+  }
+
+  .music-card:hover .music-card-play {
+    transform: scale(1);
+  }
+
+  .music-card-info {
+    @apply p-5;
+  }
+
+  .music-card-title {
+    @apply font-bold text-gray-800 truncate mb-1;
+  }
+
+  .music-card-artist {
+    @apply text-sm text-gray-400 truncate;
+  }
+
+  /* =============================================
+     BUTTON COMPONENTS
+     ============================================= */
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/30 transition-all duration-300 flex items-center gap-2 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-gray-100 backdrop-blur-sm text-gray-700 font-semibold rounded-xl border border-gray-200 transition-all duration-300 flex items-center gap-2 hover:bg-gray-200 hover:border-gray-300 active:scale-95;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 bg-gradient-to-r from-red-600 to-rose-600 text-white font-semibold rounded-xl shadow-lg shadow-red-500/30 transition-all duration-300 flex items-center gap-2 hover:shadow-xl hover:shadow-red-500/40 hover:-translate-y-0.5 active:scale-95;
+  }
+
+  .btn-icon {
+    @apply w-10 h-10 rounded-full bg-gray-100 backdrop-blur-sm border border-gray-200 flex items-center justify-center text-gray-600 transition-all duration-300 hover:bg-primary-100 hover:border-primary-300 hover:text-primary-600 active:scale-90;
+  }
+
+  .btn-play-main {
+    @apply w-16 h-16 rounded-full bg-gradient-purple-blue flex items-center justify-center text-white text-2xl shadow-xl shadow-primary-500/40 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/50 active:scale-95;
+  }
+
+  /* =============================================
+     FORM COMPONENTS
+     ============================================= */
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-gray-50 backdrop-blur-sm border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:bg-white;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium text-gray-700 mb-2;
+  }
+
+  .form-group {
+    @apply space-y-2;
+  }
+
+  .file-upload {
+    @apply relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center transition-all duration-300 cursor-pointer hover:border-primary-500 hover:bg-primary-50;
+  }
+
+  .file-upload-icon {
+    @apply text-4xl text-gray-500 mb-3;
+  }
+
+  .file-upload-text {
+    @apply text-gray-400 text-sm;
+  }
+
+  /* =============================================
+     PLAYER COMPONENTS
+     ============================================= */
+
+  .player-bar {
+    @apply fixed bottom-0 left-64 right-0 h-24 bg-white/95 backdrop-blur-xl border-t border-gray-200 z-40 px-6 flex items-center shadow-lg shadow-gray-200/50;
+  }
+
+  .player-track-info {
+    @apply flex items-center gap-4 w-1/4;
+  }
+
+  .player-album-art {
+    @apply w-14 h-14 rounded-lg bg-gradient-to-br from-primary-600/40 to-accent-600/40 shadow-lg;
+  }
+
+  .player-track-title {
+    @apply font-semibold text-gray-800 truncate;
+  }
+
+  .player-track-artist {
+    @apply text-sm text-gray-400 truncate;
+  }
+
+  .player-controls {
+    @apply flex-1 flex flex-col items-center gap-3;
+  }
+
+  .player-buttons {
+    @apply flex items-center gap-4;
+  }
+
+  .player-ctrl-btn {
+    @apply text-gray-500 text-xl transition-all duration-200 hover:text-primary-600 hover:scale-110 active:scale-95;
+  }
+
+  .player-progress {
+    @apply w-full max-w-xl flex items-center gap-3;
+  }
+
+  .player-time {
+    @apply text-xs text-gray-500 font-mono w-12;
+  }
+
+  .progress-bar {
+    @apply flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden cursor-pointer relative;
+  }
+
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-100;
+  }
+
+  .progress-thumb {
+    @apply absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg opacity-0 transition-opacity;
+  }
+
+  .progress-bar:hover .progress-thumb {
+    opacity: 1;
+  }
+
+  .player-volume {
+    @apply flex items-center justify-end gap-3 w-1/4;
+  }
+
+  .volume-icon {
+    @apply text-gray-400 text-lg;
+  }
+
+  .volume-slider {
+    @apply w-24 h-1.5 bg-dark-600 rounded-full cursor-pointer appearance-none accent-primary-500;
+  }
+
+  /* =============================================
+     PAGE COMPONENTS
+     ============================================= */
+
+  .page-header {
+    @apply flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8;
+  }
+
+  .page-title {
+    @apply text-4xl font-bold bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent;
+  }
+
+  .page-subtitle {
+    @apply text-gray-400 mt-1;
+  }
+
+  .search-bar {
+    @apply flex items-center gap-3 px-4 py-3 bg-gray-50 backdrop-blur-sm rounded-xl border border-gray-200 min-w-[300px] focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/20 transition-all duration-300;
+  }
+
+  .search-icon {
+    @apply text-gray-500;
+  }
+
+  .search-input {
+    @apply bg-transparent border-none outline-none text-gray-800 placeholder-gray-400 flex-1;
+  }
+
+  .tracks-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6;
+  }
+
+  /* =============================================
+     UTILITY CLASSES
+     ============================================= */
+
+  .glow-purple {
+    @apply shadow-lg shadow-primary-500/30;
+  }
+
+  .glow-blue {
+    @apply shadow-lg shadow-accent-500/30;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom Range Slider Styling */
+@layer utilities {
+  input[type="range"] {
+    @apply appearance-none bg-transparent cursor-pointer;
+  }
+
+  input[type="range"]::-webkit-slider-track {
+    @apply h-1.5 bg-gray-200 rounded-full;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    @apply appearance-none w-3 h-3 bg-white rounded-full shadow-lg hover:scale-125 transition-transform;
+  }
+
+  input[type="range"]::-moz-range-track {
+    @apply h-1.5 bg-gray-200 rounded-full;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    @apply appearance-none w-3 h-3 bg-white rounded-full shadow-lg border-0;
+  }
+}

@@ -1,0 +1,49 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Your Library</h1>
+    <p class="page-subtitle">{{ filteredTracks().length }} tracks in your collection</p>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <div class="search-bar">
+      <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+      <input type="text" placeholder="Search tracks..." class="search-input"
+        (input)="searchQuery.set($any($event.target).value)">
+    </div>
+    <a routerLink="/add" class="btn-primary">
+      <i data-lucide="plus" class="w-5 h-5"></i>
+      <span>Add Track</span>
+    </a>
+  </div>
+</div>
+
+<div class="tracks-grid">
+  @for (track of filteredTracks(); track track.id) {
+  <div class="music-card group" [routerLink]="['/track', track.id]">
+    <div class="music-card-image">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <i data-lucide="music" class="w-16 h-16 text-white/30"></i>
+      </div>
+      <div class="music-card-overlay">
+        <button class="music-card-play" (click)="onPlayTrack(track, $event); $event.stopPropagation()">
+          <i data-lucide="play" class="w-7 h-7 ml-1"></i>
+        </button>
+      </div>
+    </div>
+    <div class="music-card-info">
+      <h3 class="music-card-title">{{ track.title }}</h3>
+      <p class="music-card-artist">{{ track.artist }}</p>
+    </div>
+  </div>
+  } @empty {
+  <div class="col-span-full flex flex-col items-center justify-center py-20">
+    <i data-lucide="music" class="w-16 h-16 text-gray-300 mb-4"></i>
+    <h3 class="text-xl font-semibold text-gray-500 mb-2">No tracks yet</h3>
+    <p class="text-gray-400 mb-6">Start building your music library</p>
+    <a routerLink="/add" class="btn-primary">
+      <i data-lucide="plus" class="w-5 h-5"></i>
+      <span>Add Your First Track</span>
+    </a>
+  </div>
+  }
+</div>

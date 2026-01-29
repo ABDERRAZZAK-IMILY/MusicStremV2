@@ -22,15 +22,24 @@ public class TrackController {
         return service.getAllTracks();
     }
 
-    @PostMapping(consumes = {"multipart/form-data"})
+    @PostMapping(consumes = { "multipart/form-data" })
     public TrackDTO addTrack(
             @RequestPart("track") TrackDTO track,
             @RequestPart("audioFile") MultipartFile audio,
-            @RequestPart(value = "coverImage", required = false) MultipartFile cover
-    ) throws Exception {
+            @RequestPart(value = "coverImage", required = false) MultipartFile cover) throws Exception {
         track.setId(UUID.randomUUID().toString());
         track.setAddedDate(LocalDateTime.now());
         return service.saveTrack(track, audio, cover);
+    }
+
+    @PutMapping(value = "/{id}", consumes = { "multipart/form-data" })
+    public TrackDTO updateTrack(
+            @PathVariable String id,
+            @RequestPart("track") TrackDTO track,
+            @RequestPart(value = "audioFile", required = false) MultipartFile audio,
+            @RequestPart(value = "coverImage", required = false) MultipartFile cover) throws Exception {
+        track.setId(id);
+        return service.updateTrack(id, track, audio, cover);
     }
 
     @DeleteMapping("/{id}")

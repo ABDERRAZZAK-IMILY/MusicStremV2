@@ -1,0 +1,91 @@
+<div class="max-w-4xl mx-auto">
+    @if (track()) {
+    <div class="glass-card overflow-hidden">
+        <div class="relative h-72 bg-gradient-to-br from-primary-600/40 to-accent-600/40">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i data-lucide="music" class="w-24 h-24 text-white/40"></i>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent"></div>
+
+            <div class="absolute bottom-0 left-0 right-0 p-8">
+                <p class="text-primary-300 text-sm font-medium mb-2">TRACK</p>
+                <h1 class="text-4xl font-bold text-white mb-2">{{ track()?.title }}</h1>
+                <p class="text-gray-300">
+                    <span class="font-medium">{{ track()?.artist }}</span>
+                    <span class="mx-2 text-gray-500">•</span>
+                    <span class="text-gray-400">{{ track()?.genre }}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="p-8 border-b border-gray-200">
+            <div class="flex items-center gap-4">
+                <button class="btn-play-main" (click)="playTrack()">
+                    <i data-lucide="play" class="w-7 h-7 ml-1"></i>
+                </button>
+                <button class="btn-icon">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                </button>
+                <button class="btn-icon">
+                    <i data-lucide="list-plus" class="w-5 h-5"></i>
+                </button>
+                <button class="btn-icon">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                </button>
+
+                <div class="ml-auto flex gap-3">
+                    <a routerLink="/library" class="btn-secondary">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                        <span>Back to Library</span>
+                    </a>
+                    <a [routerLink]="['/edit', id]" class="btn-primary">
+                        <i data-lucide="pencil" class="w-5 h-5"></i>
+                        <span>Edit Track</span>
+                    </a>
+                    <button class="btn-danger" (click)="deleteTrack()">
+                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                        <span>Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <h2 class="text-lg font-semibold text-gray-800 mb-6">Track Information</h2>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Duration</p>
+                        <p class="text-gray-800 font-medium">{{ track()?.duration | duration }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Genre</p>
+                        <p class="text-gray-800 font-medium">{{ track()?.genre }}</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Added On</p>
+                        <p class="text-gray-800 font-medium">{{ track()?.addedDate | date:'MMMM d, y' }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Description</p>
+                        <p class="text-gray-800 font-medium">{{ track()?.description || 'No description' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    } @else {
+    <div class="glass-card p-12 text-center">
+        <i data-lucide="music" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
+        <h3 class="text-xl font-semibold text-gray-500 mb-2">Track not found</h3>
+        <p class="text-gray-400 mb-6">The requested track could not be loaded</p>
+        <a routerLink="/library" class="btn-primary inline-flex">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            <span>Back to Library</span>
+        </a>
+    </div>
+    }
+</div>
