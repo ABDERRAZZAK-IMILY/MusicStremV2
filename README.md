@@ -1,4 +1,4 @@
-# 🎵 MusiqueApp - Local Music Management & Player
+# 🎵 MusiqueApp V2 - Local Music Management & Player
 
 A modern Angular-based web application for managing and playing local music files. Store, organize, and enjoy your personal music library directly in your browser with offline support using IndexedDB.
 
