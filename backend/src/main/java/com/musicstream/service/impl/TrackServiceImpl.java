@@ -29,7 +29,8 @@ public class TrackServiceImpl implements ITrackService {
 
     @Override
     public TrackDTO saveTrack(TrackDTO trackDto, MultipartFile audio, MultipartFile cover) throws Exception {
-        if (!Files.exists(root)) Files.createDirectory(root);
+        if (!Files.exists(root))
+            Files.createDirectory(root);
 
         Track track = trackMapper.toEntity(trackDto);
 
@@ -39,6 +40,38 @@ public class TrackServiceImpl implements ITrackService {
             track.setAudioFileUrl("/uploads/" + audioFilename);
         }
         return trackMapper.toDTO(repository.save(track));
+    }
+
+    public TrackDTO updateTrack(String id, TrackDTO trackDto, MultipartFile audio, MultipartFile cover)
+            throws Exception {
+        if (!Files.exists(root))
+            Files.createDirectory(root);
+
+        Track existingTrack = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Track not found with id: " + id));
+
+        // Update basic fields
+        existingTrack.setTitle(trackDto.getTitle());
+        existingTrack.setArtist(trackDto.getArtist());
+        existingTrack.setGenre(trackDto.getGenre());
+        existingTrack.setDescription(trackDto.getDescription());
+        existingTrack.setDuration(trackDto.getDuration());
+
+        // Update audio file if provided
+        if (audio != null && !audio.isEmpty()) {
+            String audioFilename = UUID.randomUUID() + "_" + audio.getOriginalFilename();
+            Files.copy(audio.getInputStream(), this.root.resolve(audioFilename), StandardCopyOption.REPLACE_EXISTING);
+            existingTrack.setAudioFileUrl("/uploads/" + audioFilename);
+        }
+
+        // Update cover image if provided
+        if (cover != null && !cover.isEmpty()) {
+            String coverFilename = UUID.randomUUID() + "_" + cover.getOriginalFilename();
+            Files.copy(cover.getInputStream(), this.root.resolve(coverFilename), StandardCopyOption.REPLACE_EXISTING);
+            existingTrack.setCoverImageUrl("/uploads/" + coverFilename);
+        }
+
+        return trackMapper.toDTO(repository.save(existingTrack));
     }
 
     @Override
