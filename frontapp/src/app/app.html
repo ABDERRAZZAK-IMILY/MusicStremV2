@@ -1,3 +1,26 @@
-<h1 class="text-4xl font-bold text-purple-600">
-  Angular 20 + Tailwind v4 works 🚀
-</h1>
+<div class="app-container">
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">
+        <i data-lucide="music" class="w-5 h-5"></i>
+      </div>
+      <span class="sidebar-title">MusicStream</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/library" routerLinkActive="nav-link-active" class="nav-link">
+        <i data-lucide="library" class="nav-icon w-5 h-5"></i>
+        <span>Library</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content pb-32">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Player Component -->
+  <app-player></app-player>
+</div>
