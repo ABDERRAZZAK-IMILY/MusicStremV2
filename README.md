@@ -1,4 +1,4 @@
-# 🎵 MusiqueApp V2 - Local Music Management & Player
+# 🎵 MusiqueApp V2
 
 A modern Angular-based web application for managing and playing local music files. Store, organize, and enjoy your personal music library directly in your browser with offline support using IndexedDB.
 
@@ -12,7 +12,6 @@ A modern Angular-based web application for managing and playing local music file
 - **🔍 Search & Filter** - Search tracks by title or artist, filter by genre
 - **▶️ Audio Player** - Full-featured player with play/pause, seek, volume control, and progress tracking
 - **⏭️ Playlist Navigation** - Next/previous track support
-- **💾 Offline Storage** - All music stored locally using IndexedDB (Dexie.js)
 - **📱 Responsive Design** - Built with TailwindCSS for a modern, responsive UI
 - **🖼️ Cover Art Support** - Add custom cover images to your tracks
 
@@ -23,8 +22,7 @@ A modern Angular-based web application for managing and playing local music file
 | **Angular 20** | Frontend framework with signals-based reactivity |
 | **TypeScript** | Type-safe JavaScript |
 | **TailwindCSS 4** | Utility-first CSS framework |
-| **Dexie.js** | IndexedDB wrapper for offline storage |
-| **Howler.js** | Audio library types |
+| ** NjRx** | Stat mangment |
 | **RxJS** | Reactive programming |
 
 ## 📁 Project Structure
