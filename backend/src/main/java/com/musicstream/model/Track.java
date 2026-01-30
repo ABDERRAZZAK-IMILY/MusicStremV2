@@ -20,5 +20,4 @@ public class Track {
     private String genre;
     private String coverImageUrl;
     private String audioFileUrl;
-
 }
