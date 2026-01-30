@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: musicstream/backend
+        working-directory: /backend
     steps:
       - uses: actions/checkout@v4
       
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: musicstream/frontapp
+        working-directory: /frontapp
     steps:
       - uses: actions/checkout@v4
 
@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: musicstream/frontapp/package-lock.json
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
         run: npm ci
@@ -53,4 +53,4 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Verify Docker Compose config
-        run: docker compose -f musicstream/docker-compose.yml config
+        run: docker compose -f /docker-compose.yml config
