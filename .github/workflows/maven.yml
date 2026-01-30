@@ -9,9 +9,6 @@ on:
 jobs:
   backend-ci:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend 
     steps:
       - uses: actions/checkout@v4
       
@@ -23,13 +20,10 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn clean package -DskipTests
+        run: mvn -f musicstream/backend/pom.xml clean package -DskipTests
 
   frontend-ci:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: musicstream/frontapp
     steps:
       - uses: actions/checkout@v4
 
@@ -38,13 +32,17 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: musicstream/frontapp/package-lock.json
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd musicstream/frontapp
+          npm ci
 
       - name: Build Angular app
-        run: npm run build
+        run: |
+          cd musicstream/frontapp
+          npm run build
 
   docker-check:
     needs: [backend-ci, frontend-ci]
