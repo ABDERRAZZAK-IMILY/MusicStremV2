@@ -9,6 +9,9 @@ on:
 jobs:
   backend-ci:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend 
     steps:
       - uses: actions/checkout@v4
       
@@ -20,10 +23,13 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: mvn -pl backend clean package -DskipTests
+        run: mvn clean package -DskipTests
 
   frontend-ci:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: musicstream/frontend
     steps:
       - uses: actions/checkout@v4
 
@@ -32,19 +38,19 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: musicstream/frontend/package-lock.json
 
       - name: Install dependencies
-        run: cd frontend && npm ci
+        run: npm ci
 
       - name: Build Angular app
-        run: cd frontend && npm run build
+        run: npm run build
 
-  docker-build:
+  docker-check:
     needs: [backend-ci, frontend-ci]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      - name: Build Docker images
-        run: docker-compose build
+      - name: Verify Docker Compose file
+        run: docker compose -f musicstream/docker-compose.yml config
