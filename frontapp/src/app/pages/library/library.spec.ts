@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
 import { Library } from './library';
 
 describe('Library', () => {
@@ -8,13 +11,17 @@ describe('Library', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Library]
-    })
-    .compileComponents();
+      imports: [Library],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter([]),
+        provideHttpClient(),
+        provideStore({})
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Library);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
