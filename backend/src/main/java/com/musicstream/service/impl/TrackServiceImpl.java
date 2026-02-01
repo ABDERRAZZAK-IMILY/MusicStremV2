@@ -74,6 +74,15 @@ public class TrackServiceImpl implements ITrackService {
         return trackMapper.toDTO(repository.save(existingTrack));
     }
 
+    // backend/src/main/java/com/musicstream/service/impl/TrackServiceImpl.java
+
+    @Override
+    public TrackDTO getTrackById(String id) {
+        return repository.findById(id)
+                .map(trackMapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Track not found with id: " + id));
+    }
+
     @Override
     public void deleteTrack(String id) {
         repository.deleteById(id);
