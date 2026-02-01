@@ -15,7 +15,7 @@ export const TrackActions = createActionGroup({
     'Delete Track': props<{ id: string }>(),
     'Delete Track Success': props<{ id: string }>(),
 
-    'get Track by id' : props<{id: string}>() ,
-    'get Track by id Succes' : props<{id : string}>
+    'Get Track By Id': props<{ id: string }>(), 
+    'Get Track By Id Success': props<{ track: Track }>()
   },
 });
