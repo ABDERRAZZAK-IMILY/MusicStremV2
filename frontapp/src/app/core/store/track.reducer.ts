@@ -4,12 +4,14 @@ import { TrackActions } from './track.actions';
 
 export interface TrackState {
   tracks: Track[];
+  selectedTrack: Track | null;
   loading: boolean;
   error: string | null;
 }
 
 export const initialState: TrackState = {
   tracks: [],
+  selectedTrack: null,
   loading: false,
   error: null
 };
@@ -31,7 +33,10 @@ export const trackReducer = createReducer(
   on(TrackActions.deleteTrackSuccess, (state, { id }) => ({
     ...state, tracks: state.tracks.filter(t => t.id !== id)
   })),
-    on(TrackActions.getTrackById, (state, { id }) => ({
-    ...state, tracks: state.tracks.filter(t => t.id !== id)
+  on(TrackActions.getTrackById, (state) => ({
+    ...state, loading: true, error: null 
+  })),
+  on(TrackActions.getTrackByIdSuccess, (state, { track }) => ({
+    ...state, selectedTrack: track, loading: false 
   }))
 );
