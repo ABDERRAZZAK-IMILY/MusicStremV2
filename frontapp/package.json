@@ -2,8 +2,8 @@
   "name": "frontapp",
   "version": "0.0.0",
   "scripts": {
-    "start": "npm run tailwind:build && ng serve",
-    "build": "npm run tailwind:build && ng build",
+    "start": "ng serve",
+    "build": "ng build",
     "tailwind:build": "npx @tailwindcss/cli -i src/tailwind.css -o src/styles.css",
     "tailwind:watch": "npx @tailwindcss/cli -i src/tailwind.css -o src/styles.css --watch",
     "ng": "ng",
