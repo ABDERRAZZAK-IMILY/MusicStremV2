@@ -64,14 +64,15 @@ init() {
   }
 
 
- getTrackById(id: string){
 
-    return this.http.get(`${this.apiUrl}/${id}`).subscribe({
-      next : () => this.store.dispatch(TrackActions.getTrackById({id})),
-      error: (err) => console.error('Error get track:', err)
-    })
-
-  }
+  getTrackById(id: string) {
+  return this.http.get<Track>(`${this.apiUrl}/${id}`).subscribe({
+    next: (track) => {
+      this.store.dispatch(TrackActions.getTrackByIdSuccess({ track }));
+    },
+    error: (err) => console.error('Error fetching track:', err)
+  });
+}
 
 
   updateTrack(id: string, track: Track, audioFile?: File, coverImage?: File) {
