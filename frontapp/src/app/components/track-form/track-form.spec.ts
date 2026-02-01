@@ -1,20 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TrackForm } from './track-form';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { provideStore } from '@ngrx/store';
+import { TrackFormComponent } from './track-form';
 
 describe('TrackForm', () => {
-  let component: TrackForm;
-  let fixture: ComponentFixture<TrackForm>;
+  let component: TrackFormComponent;
+  let fixture: ComponentFixture<TrackFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrackForm]
+      imports: [TrackFormComponent],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter([]),
+        provideHttpClient(),
+        provideStore({})
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TrackForm);
+    fixture = TestBed.createComponent(TrackFormComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
