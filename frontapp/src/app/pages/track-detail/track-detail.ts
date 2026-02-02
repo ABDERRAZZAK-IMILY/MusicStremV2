@@ -2,7 +2,7 @@ import { Component, inject, Input, computed, signal, OnInit, AfterViewInit, PLAT
 import { TrackService } from '../../services/track';
 import { Router, RouterLink } from "@angular/router";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { DurationPipe } from '../../components/duration-pipe';
+import { DurationPipe } from '../../core/pipes/duration-pipe';
 import { Store } from '@ngrx/store';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { selectAllTracks } from '../../core/store/track.selectors';

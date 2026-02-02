@@ -6,7 +6,7 @@ import { isPlatformBrowser } from "@angular/common";
 import { TrackActions } from "../../core/store/track.actions";
 import { selectAllTracks, selectTracksLoading } from "../../core/store/track.selectors";
 import { AudioPlayerService } from "../../services/audio-player";
-import { DurationPipe } from "../../components/duration-pipe";
+import { DurationPipe } from "../../core/pipes/duration-pipe";
 import { Track } from "../../models/track.model";
 
 declare const lucide: any;
