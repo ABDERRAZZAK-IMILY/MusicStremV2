@@ -2,7 +2,7 @@ import { Component, inject, AfterViewInit, DoCheck, PLATFORM_ID } from '@angular
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AudioPlayerService } from '../../services/audio-player';
-import { DurationPipe } from '../duration-pipe';
+import { DurationPipe } from '../../core/pipes/duration-pipe';
 
 declare const lucide: any;
 
